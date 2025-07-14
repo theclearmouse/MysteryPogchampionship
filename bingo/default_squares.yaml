@@ -1,0 +1,261 @@
+goals:
+- name: Maps, Compasses, and Keys
+  min: 1
+  max: 4
+  choices:
+  - - Collect Eastern Palace Map
+    - Collect Desert Palace Map
+    - Collect Tower of Hera Map
+  - - Collect Dark Palace Map
+    - Collect Swamp Palace Map
+    - Collect Skull Woods Map
+  - - Collect Thieves' Town Map
+    - Collect Ice Palace Map
+    - Collect Misery Mire Map
+    - Collect Turtle Rock Map
+  - - Collect Eastern Palace Compass
+    - Collect Desert Palace Compass
+    - Collect Tower of Hera Compass
+  - - Collect Dark Palace Compass
+    - Collect Swamp Palace Compass
+    - Collect Skull Woods Compass
+  - - Collect Thieves' Town Compass
+    - Collect Ice Palace Compass
+    - Collect Misery Mire Compass
+    - Collect Turtle Rock Compass
+  - - Collect Hyrule Castle Map
+    - Collect Ganon's Tower Map
+    - Collect Ganon's Tower Compass
+  - - Collect 1 LW Map and 1 LW Compass
+    - Collect 1 DW Map and 1 DW Compass
+    - Collect 1 LW Map and 1 DW Compass
+    - Collect 1 DW Map and 1 LW Compass
+  - - Collect 1 map and 1 compass for the same dungeon
+  - - Collect 5 maps OR 5 compasses
+  - - Collect 3 DW Big Keys
+    - Collect 2 LW Big Keys
+    - Collect 2 LW Big Keys OR 3 DW Big Keys
+- name: Items
+  min: 3
+  max: 7
+  choices:
+  - - Collect 3 swords
+    - Collect 2 shields
+  - - Collect the Lamp
+    - Collect the Hookshot
+    - Collect the Hammer
+    - Collect the Fire Rod
+    - Collect the Ice Rod
+    - Collect the Mirror
+  - - Collect the Flute
+    - Collect the Cane of Somaria
+    - Collect the Flippers
+    - Collect the Real Boots
+  - - Collect Bombos Medallion
+    - Collect Ether Medallion
+    - Collect Quake Medallion
+    - Collect any 2 medallions
+  - - Collect 2 bottles
+    - Collect the Book
+    - Collect the Bug Net
+    - Collect the Shovel
+  - - Collect a rod and cane of the same color
+    - Collect a rod and cane of different colors
+    - Collect a cane and boomerang of the same color
+    - Collect a cane and boomerang of different colors
+    - Collect a rod and boomerang of the same color
+    - Collect a rod and boomerang of different colors
+  - - Mail Upgrade
+    - Collect the Cape
+    - Collect the Cane of Byrna
+    - Collect any 2 safety items
+  - - Activate the Flute
+    - Enter Desert Palace with the Book
+- name: Combat and Dungeons
+  min: 3
+  max: 7
+  choices:
+  - - Defeat Mothula
+    - Defeat Arrghus
+    - Defeat Blind
+    - Defeat Moldorm
+    - Defeat Vitreous
+  - - Defeat Armos Knights
+    - Defeat Kholdstare
+    - Defeat Trinexx
+    - Defeat Helmasaur King
+    - Defeat Lanmolas
+  - - Defeat Aga 1
+    - Defeat Aga 2
+    - Defeat Aga 1 OR Aga 2
+  - - Defeat 2 Light World Dungeons
+    - Defeat 3 Dark World Dungeons
+    - Defeat 4 Dark World Dungeons
+    - Defeat 3 Light World Dungeons
+  - - Defeat 1 LW and 2 DW dungeons
+    - Defeat 2 LW and 2 DW Dungeons
+    - Collect 3 Crystals
+    - Collect 4 Crystals
+    - Collect 2 Pendants
+    - Collect Green Pendant
+  - - Visit 3 light world dungeon fairy rooms
+  - - Burn a Stalfos Skull
+    - Freeze a Bomb Slug
+    - Freeze a Kodongo
+  - - Stun a Terrorpin
+    - Burn a Red Bari
+    - Burn a Ball & Chain Guard
+  - - Defeat a Red Eyegore and a Red Mimic
+  - - Eastern Palace Big Chest
+    - Desert Palace Big Chest
+    - Tower of Hera Big Chest
+    - Palace of Darkness Big Chest
+    - Swamp Palace Big Chest
+    - Skull Woods Big Chest
+    - Thieves' Town Big Chest
+    - Ice Palace Big Chest
+    - Misery Mire Big Chest
+    - Turtle Rock Big Chest
+  - - Pull tongue statues in 2 different dungeons
+    - Spawn chests in 2 different dungeons
+    - Bomb open cracked floors in 2 different dungeons
+    - Move walls in 2 different dungeons
+    - Clear tile rooms in 2 different dungeons
+  - - Stun a Pikit
+    - Defeat a Pickle
+    - Defeat a Deadrock
+    - Stun a Pickle
+  - - Use a sign to defeat an enemy in the LW
+    - Use a sign to defeat an enemy in the DW
+    - Use signs to defeat an enemy in both LW and DW
+- name: Progress and Exploration
+  min: 3
+  max: 7
+  choices:
+  - - 10 total hearts
+    - 11 total hearts
+    - 12 total hearts
+  - - 4 heart pieces
+    - 8 heart pieces
+    - 12 heart pieces
+  - - 3 heart containers
+    - 4 heart containers
+    - 5 heart containers
+    - 6 heart containers
+  - - Reveal a cave hidden under a rock in both worlds
+  - - Break Ether tablet
+    - Break Bombos tablet
+    - Break Ether OR Bombos tablet
+  - - Collect the item on Lake Hylia Island
+    - Collect the item on Floating Island
+    - Collect the item in Ice Rod Cave
+    - Collect the item from the Man Under the Bridge
+  - - Collect the item in Bonk Grave (King's Tomb)
+    - Collect the item in Byrna Cave (Spike Cave)
+    - Collect the item in Mimic Cave
+    - Collect the item from Bumper Ledge
+  - - Collect the item in Checkerboard Cave
+    - Collect the Item in Cave 45
+    - Collect the item in Graveyard Ledge Cave
+    - Collect the item in Aginah's Cave
+  - - Open Turtle Rock entrance
+    - Open Misery Mire Entrance
+    - Open Misery Mire OR Turtle Rock Entrance
+  - - Open Purple Chest
+    - Collect the Item from the Smith
+  - - 25 bombs
+    - 30 bombs
+    - 35 bombs
+    - 40 bombs
+  - - 40 arrows
+    - 45 arrows
+    - 50 arrows
+    - 55 arrows
+  - - 20 bombs AND 40 arrows
+    - 25 bombs AND 40 arrows
+    - 30 bombs AND 40 arrows
+    - 30 bombs AND 50 arrows
+    - Max out bomb OR arrow capacity
+- name: Hard/Luck
+  min: 1
+  max: 2
+  choices:
+  - - Break Ether AND Bombos tablets
+  - - Open 6 small key doors in Ice Palace
+  - - Open 4 small key doors in Skull Woods
+  - - Kill 6 Freezors in Ice Palace
+  - - Spend 1500 Rupees
+  - - Pull Pedestal
+  - - Open 5 small key doors in Palace of Darkness
+  - - Open 6 small key doors in Misery Mire
+  - - Defeat a Lynel
+  - - Perfect Archery Game
+  - - Get the item from Lumberjack Ledge
+  - - Collect all 3 medallions
+  - - Bring a golden bee to the bottle vendor
+  - - Open 8 small key doors in Ganon's Tower
+  - - Collect 3 Triforce Pieces
+- name: Misc and Memes
+  min: 2
+  max: 7
+  choices:
+  - - Pay the Hamburger Helper Hand
+    - Pay for a hint OR health from 3 different NPCs
+  - - 4 NPC/Object Followers
+  - - Take a follower to Catfish
+  - - Die to Catfish
+    - Die to Aga
+    - Die to Catfish OR to Aga
+    - Die to a cucco swarm
+    - Use the mirror on the top floor of Castle Tower
+  - - Bomb Magic Bat
+    - Bomb Validation Chest (Moldorm 2 Chest)
+    - Bomb Hera Basement Chest
+    - Bomb Misery Mire Cutscene Chest
+  - - Die to Trinexx
+    - Get Wallmastered in 2 different dungeons
+    - Defeat Moldorm 2, then fall
+  - - Hit a crystal switch with a frozen enemy
+    - Freeze a Pokey
+  - - Free the cucco in the back of Kakariko Tavern
+    - Powder the cucco in Kak to turn it back to a Lady
+    - Free 2 cuccos under pots in Kakariko
+  - - Consume an apple
+  - - Hammer the Smith's bench for a special message
+  - - Have 3 different colored potions at the same time
+  - - Have a drink (of potion, any color) in the front of Kakariko Tavern
+  - - Freeze and toss 3 birds
+  - - Pull the tongue statue in Turtle Rock
+  - - Bring a fish to the bottle vendor
+  - - Freeze and burn the same enemy
+    - Kill an enemy with a bee/bees
+  - - Play both Light World chest games
+  - - Release one bee and one fairy from bottles (not by dying)
+  - - Fill a bottle from pyramid fairy pool
+    - Fill a bottle from waterfall fairy pool
+    - Fill a bottle from a fairy pool
+  - - Kiss the Sanc Priest
+    - Kiss the Old Man
+    - Kiss Zelda
+    - Kiss Potion Shop NPC
+  - - Buy a red shield OR the Zora item
+  - - Escape Thieves' Town Bumper Room
+  - - Use Bombos in Hotel Mario
+    - Use a Medallion on a boss (Not Kholdstare's shell)
+    - Use Quake at Kakariko Weathervane
+    - Use Ether in the front of Tavern
+  - - Collect 2 Triforce Pieces
+- name: Conclusion
+  min: 0
+  max: 1
+  choices:
+  - - Finish in a Dark Room
+  - - Finish in a room with a firebar
+  - - Finish as a bunny
+  - - Finish in a room with a warp tile
+  - - Finish in a tile room
+  - - Finish in a room with a bumper
+  - - Finish in a room with a firesnake
+  - - Finish on top of the pyramid
+  - - Finish in a rupee room
+  - - Finish in Ganon's arena
