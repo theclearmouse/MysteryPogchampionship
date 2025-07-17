@@ -194,7 +194,6 @@ goals:
   - - Collect all 3 medallions
   - - Bring a golden bee to the bottle vendor
   - - Open 8 small key doors in Ganon's Tower
-  - - Collect 3 Triforce Pieces
 - name: Misc and Memes
   min: 2
   max: 7
@@ -244,7 +243,6 @@ goals:
     - Use a Medallion on a boss (Not Kholdstare's shell)
     - Use Quake at Kakariko Weathervane
     - Use Ether in the front of Tavern
-  - - Collect 2 Triforce Pieces
 - name: Conclusion
   min: 0
   max: 1
