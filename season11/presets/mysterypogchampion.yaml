@@ -1,2 +1,1681 @@
 meta:
+  algorithm: balanced
+  branch: OWR
   players: 1
+  seed_name: pogchamp
+  seed_notes: Pogchampion Mystery Season 11
+  user_notes: Pogchampion Mystery Season 11
+settings: # Default settings
+  1:
+    aga_randomness: true
+    bossshuffle: none
+    bow_mode:
+      progressive: 60
+      retro: 10
+      retro_silvers: 10
+      silvers: 20
+    colorizepots: 1
+    decoupledoors: 0
+    difficulty:
+      expert: 10
+      hard: 20
+      normal: 70
+    door_self_loops: 0
+    door_shuffle: vanilla
+    door_type_mode: original
+    dropshuffle: none
+    enemy_damage: default
+    enemy_health: default
+    enemy_shuffle: none
+    enemylogic: allow_all
+    experimental: 0
+    hints:
+      0: 50
+      1: 50
+    item_functionality: normal
+    key_logic_algorithm: partial
+    logic: noglitches
+    mixed_travel: prevent
+    openpyramid: auto
+    overworld_map: default
+    ow_crossed: none
+    ow_fluteshuffle: vanilla
+    ow_keepsimilar: 0
+    ow_mixed: 0
+    ow_shuffle: vanilla
+    ow_terrain: 0
+    ow_whirlpool: 0
+    pottery: none
+    pseudoboots: 1
+    randomkeydoors: 0   # Variable value, not used in actual generation yaml
+    shopsanity: 0
+    shufflelinks: 0
+    shufflepots: 0
+    shuffletavern: 0
+    shuffle_followers: 0
+    skullwoods: original
+    standardize_palettes: standardize
+    take_any: none
+    trap_door_mode: optional
+    triforce_goal: 0
+    triforce_pool: 0
+start_inventory:
+  1:
+    - Pegasus Boots:
+      yes: 50
+      no: 50
+
+# Specific scenario overrides
+rules:
+  1:
+    - and_conditions:   # Force sword if both standard and enemy shuffle
+      - Key: mode
+        Value: standard
+      - Key: enemy_shuffle
+        Value: shuffled
+      settings:
+        swords: assured
+    - and_conditions:   # Remove health/damage shuffle and item pool if swordless
+      - Key: swords
+        Value: swordless
+      settings:
+        enemy_health: default
+        enemy_damage: default
+    - and_conditions:   # Bump expert item pool back down to hard if swordless
+      - Key: swords
+        Value: swordless
+      - Key: difficulty
+        Value: expert
+      settings:
+        difficulty: hard
+    - and_conditions:   # Force mirror scroll if standard but no starting sword to allow gaining resources in escape
+      - Key: mode
+        Value: standard
+      - Key: swords
+        Value: [random, swordless]
+      settings:
+        mirrorscroll: 1
+    - and_conditions:   # Ensure blue squares/chest counters and default enemy health for full underworld enemy drop shuffle
+      - Key: dropshuffle
+        Value: underworld
+      settings:
+        dungeon_counters: "on"
+        enemy_health: default
+    - and_conditions:   # Disable blue balls/warps for AD
+      - Key: goal
+        Value: dungeons
+      settings:
+        aga_randomness: false
+    - and_conditions:   # Turn on hints and mirror scroll if door rando is enabled
+      - Key: door_shuffle
+        NotValue: vanilla
+      settings:
+        hints: 1
+        mirrorscroll: 1
+    - and_conditions:   # Use DRUnstable branch if inverted is rolled - general community unfamiliarity with OWR inverted rewrite
+      - Key: mode
+        Value: inverted
+      meta:
+        branch: DRUnstable
+    - and_conditions:   # Add in chance of take anys only in entrance modes that are not TFH
+      - Key: shuffle
+        NotValue: vanilla
+      - Key: goal
+        NotValue: triforcehunt
+      settings:
+        take_any:
+          none: 80
+          random: 20
+    - and_conditions:   # Prevent the archery game being a bingo goal if take anys exist
+      - Key: take_any
+        NotValue: none
+      bingo_squares:
+        excludes:
+          - Perfect Archery Game
+    - and_conditions:   # Force original SW setting when not crossed shuffle - followlinked almost always fails to generate
+      - Key: shuffle
+        NotValue: crossed
+      settings:
+        skullwoods: original
+    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - non-retro version
+      - Key: shuffle
+        NotValue: vanilla
+      - Key: skullwoods
+        Value: original
+      - Key: keyshuffle
+        NotValue: universal
+      placements:
+        Skull Woods - Pinball Room: Small Key (Skull Woods)
+    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - retro version
+      - Key: shuffle
+        NotValue: vanilla
+      - Key: skullwoods
+        Value: original
+      - Key: keyshuffle
+        Value: universal
+      placements:
+        Skull Woods - Pinball Room: Small Key (Universal)
+    - and_conditions:   # Generic TFH pool sizes based on enemy drop/pottery options
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: underworld
+      - Key: pottery
+        Value: cavekeys
+      settings:
+        triforce_pool: [125, 300] # range for size of the pool
+        triforce_goal: [35, 69]   # range of percentages of the above generated pool, :)
+    - and_conditions:
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: underworld
+      - Key: pottery
+        Value: dungeon
+      settings:
+        triforce_pool: [225, 450]
+        triforce_goal: [35, 69]
+    - and_conditions:
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: underworld
+      - Key: pottery
+        Value: lottery
+      settings:
+        triforce_pool: [300, 550]
+        triforce_goal: [35, 69]
+    - and_conditions:
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: keys
+      - Key: pottery
+        Value: cavekeys
+      settings:
+        triforce_pool: [100, 250]
+        triforce_goal: [35, 69]
+    - and_conditions:
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: keys
+      - Key: pottery
+        Value: dungeon
+      settings:
+        triforce_pool: [200, 400]
+        triforce_goal: [35, 69]
+    - and_conditions:
+      - Key: goal
+        Value: triforcehunt
+      - Key: dropshuffle
+        Value: keys
+      - Key: pottery
+        Value: lottery
+      settings:
+        triforce_pool: [275, 500]
+        triforce_goal: [35, 69]
+    - and_conditions:   # Disable random key doors setting if standard
+      - Key: mode
+        Value: standard
+      settings:
+        randomkeydoors: 0
+    - and_conditions:   # Settings for random key doors with vanilla dungeon layouts (ty Jem)
+      - Key: randomkeydoors
+        Value: 1
+      doors:
+        doors:
+          Desert Arrow Pot Corner W Edge: Desert North Hall E Edge
+          Desert Beamos Hall NE: Desert Tiles 2 SE
+          Desert East Wing N Edge: Desert Arrow Pot Corner S Edge
+          Desert Main Lobby E Edge: Desert East Wing W Edge
+          Desert Main Lobby N Edge: Desert Dead End Edge
+          Desert Main Lobby NE Edge: Desert North Hall SE Edge
+          Desert Main Lobby NW Edge: Desert North Hall SW Edge
+          Desert North Hall W Edge: Desert Sandworm Corner E Edge
+          Desert Sandworm Corner S Edge: Desert West Wing N Edge
+          Desert Tiles 1 Up Stairs: Desert Bridge Down Stairs
+          Desert Wall Slide NW: Desert Boss SW
+          Eastern Attic Start WS: Eastern False Switches ES
+          Eastern Cannonball Hell WS: Eastern Single Eyegore ES
+          Eastern Cannonball Ledge Key Door EN: Eastern Dark Square Key Door WN
+          Eastern Cannonball Ledge WN: Eastern Big Key EN
+          Eastern Cannonball N: Eastern Courtyard Ledge S
+          Eastern Courtyard EN: Eastern Map Valley WN
+          Eastern Courtyard Ledge E: Eastern East Wing W
+          Eastern Courtyard Ledge W: Eastern West Wing E
+          Eastern Courtyard N: Eastern Darkness S
+          Eastern Darkness Up Stairs: Eastern Attic Start Down Stairs
+          Eastern Duo Eyegores NE: Eastern Boss SE
+          Eastern Hint Tile Blocked Path SE: Eastern Big Key NE
+          Eastern Hint Tile EN: Eastern Courtyard WN
+          Eastern Lobby Bridge N: Eastern Cannonball S
+          Eastern Map Valley SW: Eastern Dark Square NW
+          GT Big Chest SW: GT Invisible Catwalk NW
+          GT Blocked Stairs Down Stairs: GT Four Torches Up Stairs
+          GT Bob's Room SE: GT Invisible Catwalk NE
+          GT Brightly Lit Hall NW: GT Agahnim 2 SW
+          GT Cannonball Bridge Up Stairs: GT Gauntlet 1 Down Stairs
+          GT Conveyor Bridge EN: GT Torch Cross WN
+          GT Conveyor Star Pits EN: GT Falling Bridge WN
+          GT Crystal Circles SW: GT Left Moldorm Ledge NW
+          GT Dash Hall NE: GT Hidden Spikes SE
+          GT Frozen Over Up Stairs: GT Brightly Lit Hall Down Stairs
+          GT Gauntlet 3 SW: GT Gauntlet 4 NW
+          GT Gauntlet 5 WS: GT Beam Dash ES
+          GT Hidden Spikes EN: GT Cannonball Bridge WN
+          GT Hidden Star ES: GT Falling Bridge WS
+          GT Hookshot NW: GT DMs Room SW
+          GT Hookshot SW: GT Double Switch NW
+          GT Hope Room EN: GT Tile Room WN
+          GT Invisible Bridges WS: GT Invisible Catwalk ES
+          GT Invisible Catwalk WS: GT Warp Maze (Pits) ES
+          GT Lobby Left Down Stairs: GT Torch Up Stairs
+          GT Lobby Right Down Stairs: GT Hope Room Up Stairs
+          GT Lobby Up Stairs: GT Crystal Paths Down Stairs
+          GT Quad Pot Up Stairs: GT Wizzrobes 1 Down Stairs
+          GT Right Moldorm Ledge Down Stairs: GT Moldorm Pit Up Stairs
+          GT Speed Torch NE: GT Petting Zoo SE
+          GT Speed Torch SE: GT Crystal Conveyor NE
+          GT Staredown Up Ladder: GT Falling Torches Down Ladder
+          GT Torch WN: GT Conveyor Cross EN
+          GT Validation WS: GT Frozen Over ES
+          GT Warp Maze (Rails) WS: GT Randomizer Room ES
+          GT Wizzrobes 2 NE: GT Conveyor Bridge SE
+          Hera 4F Up Stairs: Hera 5F Down Stairs
+          Hera 5F Up Stairs: Hera Boss Down Stairs
+          Hera Lobby Down Stairs: Hera Basement Cage Up Stairs
+          Hera Lobby Key Stairs: Hera Tile Room Up Stairs
+          Hera Lobby Up Stairs: Hera Beetles Down Stairs
+          Hera Startile Wide Up Stairs: Hera 4F Down Stairs
+          Hyrule Castle Back Hall Down Stairs: Hyrule Dungeon Map Room Up Stairs
+          Hyrule Castle East Hall W: Hyrule Castle Back Hall E
+          Hyrule Castle East Lobby N: Hyrule Castle East Hall S
+          Hyrule Castle East Lobby NW: Hyrule Castle East Hall SW
+          Hyrule Castle Lobby E: Hyrule Castle East Lobby W
+          Hyrule Castle Lobby North Stairs: Hyrule Castle Throne Room South Stairs
+          Hyrule Castle Lobby W: Hyrule Castle West Lobby E
+          Hyrule Castle Lobby WN: Hyrule Castle West Lobby EN
+          Hyrule Castle Throne Room N: Sewers Behind Tapestry S
+          Hyrule Castle West Hall E: Hyrule Castle Back Hall W
+          Hyrule Castle West Lobby N: Hyrule Castle West Hall S
+          Hyrule Dungeon Armory Down Stairs: Hyrule Dungeon Staircase Up Stairs
+          Hyrule Dungeon Guardroom N: Hyrule Dungeon Armory S
+          Hyrule Dungeon North Abyss Catwalk Edge: Hyrule Dungeon South Abyss Catwalk North Edge
+          Hyrule Dungeon North Abyss South Edge: Hyrule Dungeon South Abyss North Edge
+          Hyrule Dungeon South Abyss Catwalk West Edge: Hyrule Dungeon Guardroom Catwalk Edge
+          Hyrule Dungeon South Abyss West Edge: Hyrule Dungeon Guardroom Abyss Edge
+          Hyrule Dungeon Staircase Down Stairs: Hyrule Dungeon Cellblock Up Stairs
+          Ice Backwards Room Down Stairs: Ice Anti-Fairy Up Stairs
+          Ice Big Key Down Ladder: Ice Tongue Pull Up Ladder
+          Ice Catwalk NW: Ice Many Pots SW
+          Ice Conveyor SW: Ice Bomb Jump NW
+          Ice Cross Bottom SE: Ice Compass Room NE
+          Ice Cross Right ES: Ice Pengator Switch WS
+          Ice Firebar Down Ladder: Ice Freezors Up Ladder
+          Ice Jelly Key Down Stairs: Ice Floor Switch Up Stairs
+          Ice Lonely Freezor Down Stairs: Iced T Up Stairs
+          Ice Many Pots WS: Ice Crystal Right ES
+          Ice Narrow Corridor Down Stairs: Ice Pengator Trap Up Stairs
+          Ice Pengator Trap NE: Ice Spike Cross SE
+          Ice Spike Cross ES: Ice Spike Room WS
+          Ice Spike Room Down Stairs: Ice Spikeball Up Stairs
+          Ice Spike Room Up Stairs: Ice Hammer Block Down Stairs
+          Ice Switch Room ES: Ice Refill WS
+          Ice Switch Room SE: Ice Antechamber NE
+          Ice Tall Hint EN: Ice Hookshot Ledge WN
+          Ice Tall Hint SE: Ice Lonely Freezor NE
+          Iced T EN: Ice Catwalk WN
+          Mire 2 NE: Mire Hub SE
+          Mire Antechamber NW: Mire Boss SW
+          Mire BK Door Room EN: Mire Ledgehop WN
+          Mire BK Door Room N: Mire Left Bridge S
+          Mire Bent Bridge W: Mire Over Bridge E
+          Mire Block X WS: Mire Tall Dark and Roomy ES
+          Mire Conveyor Barrier Up Stairs: Mire Torches Top Down Stairs
+          Mire Conveyor Crystal SE: Mire Neglected Room NE
+          Mire Crystal Dead End NW: Mire Spikes SW
+          Mire Crystal Left WS: Mire Falling Foes ES
+          Mire Falling Foes Up Stairs: Mire Firesnake Skip Down Stairs
+          Mire Fishbone SE: Mire Spike Barrier NE
+          Mire Hidden Shooters ES: Mire Spikes WS
+          Mire Hub E: Mire Failure Bridge W
+          Mire Hub ES: Mire Lone Shooter WS
+          Mire Hub NE: Mire Hidden Shooters SE
+          Mire Hub Right EN: Mire Map Spot WN
+          Mire Hub Top NW: Mire Cross SW
+          Mire Hub WN: Mire Wizzrobe Bypass EN
+          Mire Hub WS: Mire Conveyor Crystal ES
+          Mire Ledgehop NW: Mire Bent Bridge SW
+          Mire Left Bridge Down Stairs: Mire Dark Shooters Up Stairs
+          Mire Minibridge NE: Mire Right Bridge SE
+          Mire Over Bridge W: Mire Fishbone E
+          Mire Post-Gap Down Stairs: Mire 2 Up Stairs
+          Mire Spike Barrier SE: Mire Wizzrobe Bypass NE
+          Mire Tile Room SW: Mire Conveyor Barrier NW
+          PoD Arena Crystals E: PoD Sexy Statue W
+          PoD Arena Ledge ES: PoD Map Balcony WS
+          PoD Arena Main NW: PoD Falling Bridge SW
+          PoD Big Chest Balcony W: PoD Dark Maze E
+          PoD Big Key Landing Down Stairs: PoD Basement Ledge Up Stairs
+          PoD Bow Statue Down Ladder: PoD Dark Pegs Up Ladder
+          PoD Compass Room E Down Stairs: PoD Dark Basement E Up Stairs
+          PoD Compass Room W Down Stairs: PoD Dark Basement W Up Stairs
+          PoD Conveyor SW: PoD Mimics 1 NW
+          PoD Dark Alley NE: PoD Boss SE
+          PoD Falling Bridge WN: PoD Dark Maze EN
+          PoD Harmless Hellway SE: PoD Arena Main NE
+          PoD Left Cage Down Stairs: PoD Shooter Room Up Stairs
+          PoD Map Balcony South Stairs: PoD Conveyor North Stairs
+          PoD Middle Cage Down Stairs: PoD Warp Room Up Stairs
+          PoD Middle Cage N: PoD Pit Room S
+          PoD Pit Room NE: PoD Arena Bridge SE
+          PoD Pit Room NW: PoD Arena Main SW
+          PoD Sexy Statue NW: PoD Mimics 2 SW
+          Sewers Behind Tapestry Down Stairs: Sewers Rope Room Up Stairs
+          Sewers Dark Cross Key Door N: Sewers Water S
+          Sewers Key Rat NE: Sewers Secret Room Key Door S
+          Sewers Pull Switch S: Sanctuary N
+          Sewers Rope Room North Stairs: Sewers Dark Cross South Stairs
+          Sewers Secret Room Up Stairs: Sewers Pull Switch Down Stairs
+          Sewers Water W: Sewers Dark Aquabats ES
+          Skull 1 Lobby WS: Skull Pot Prison ES
+          Skull 2 East Lobby WS: Skull Small Hall ES
+          Skull 3 Lobby NW: Skull Star Pits SW
+          Skull Compass Room NE: Skull Pot Prison SE
+          Skull Pinball WS: Skull Compass Room ES
+          Skull Vines NW: Skull Spike Corner SW
+          Swamp Basement Shallows NW: Swamp Waterfall Room SW
+          Swamp Behind Waterfall Up Stairs: Swamp C Down Stairs
+          Swamp Big Key Ledge WN: Swamp Barrier EN
+          Swamp Entrance Down Stairs: Swamp Pot Row Up Stairs
+          Swamp Hammer Switch WN: Swamp Hub Dead Ledge EN
+          Swamp Hub North Ledge N: Swamp Push Statue S
+          Swamp Hub S: Swamp Donut Top N
+          Swamp Hub WN: Swamp Crystal Switch EN
+          Swamp Hub WS: Swamp Trench 2 Pots ES
+          Swamp Left Elbow Down Stairs: Swamp Drain Left Up Stairs
+          Swamp Pot Row WN: Swamp Map Ledge EN
+          Swamp Pot Row WS: Swamp Trench 1 Approach ES
+          Swamp Push Statue Down Stairs: Swamp Flooded Room Up Stairs
+          Swamp Right Elbow Down Stairs: Swamp Drain Right Up Stairs
+          Swamp T NW: Swamp Boss SW
+          Swamp Trench 1 Departure WS: Swamp Hub ES
+          Swamp Trench 2 Departure WS: Swamp West Shallows ES
+          Swamp West Block Path Up Stairs: Swamp Attic Down Stairs
+          TR Chain Chomps Down Stairs: TR Pipe Pit Up Stairs
+          TR Compass Room NW: TR Hub SW
+          TR Crystal Maze North Stairs: TR Final Abyss South Stairs
+          TR Crystaroller Down Stairs: TR Dark Ride Up Stairs
+          TR Dark Ride SW: TR Dash Bridge NW
+          TR Dash Bridge SW: TR Eye Bridge NW
+          TR Dash Bridge WS: TR Crystal Maze ES
+          TR Final Abyss NW: TR Boss SW
+          TR Hallway WS: TR Lazy Eyes ES
+          TR Hub EN: TR Torches WN
+          TR Hub ES: TR Torches Ledge WS
+          TR Hub NE: TR Tile Room SE
+          TR Hub NW: TR Pokey 1 SW
+          TR Lava Dual Pipes SW: TR Twin Pokeys NW
+          TR Lava Dual Pipes WN: TR Pokey 2 EN
+          TR Lava Escape NW: TR Dash Room SW
+          TR Lava Escape SE: TR Dodgers NE
+          TR Lava Island WS: TR Pokey 2 ES
+          TR Lobby Ledge NE: TR Hub SE
+          TR Pipe Ledge WS: TR Lava Island ES
+          TR Pipe Pit WN: TR Lava Dual Pipes EN
+          TR Torches NW: TR Roller Room SW
+          Thieves Ambush E: Thieves Rail Ledge W
+          Thieves Ambush EN Edge: Thieves BK Corner WN Edge
+          Thieves Ambush ES Edge: Thieves BK Corner WS Edge
+          Thieves BK Corner NE: Thieves Hallway SE
+          Thieves BK Corner S Edge: Thieves Compass Room N Edge
+          Thieves BK Corner SW Edge: Thieves Compass Room NW Edge
+          Thieves Basement Block WN: Thieves Conveyor Bridge EN
+          Thieves Big Chest Nook ES Edge: Thieves Compass Room WS Edge
+          Thieves Conveyor Maze Down Stairs: Thieves Basement Block Up Stairs
+          Thieves Conveyor Maze WN: Thieves Triple Bypass EN
+          Thieves Cricket Hall Left Edge: Thieves Cricket Hall Right Edge
+          Thieves Hallway NE: Thieves Boss SE
+          Thieves Hellway NW: Thieves Spike Switch SW
+          Thieves Lobby E: Thieves Compass Room W
+          Thieves Lobby N Edge: Thieves Ambush S Edge
+          Thieves Lobby NE Edge: Thieves Ambush SE Edge
+          Thieves Lonely Zazak WS: Thieves Conveyor Bridge ES
+          Thieves Pot Alcove Mid WS: Thieves Spike Track ES
+          Thieves Rail Ledge NW: Thieves Pot Alcove Bottom SW
+          Thieves Spike Switch Up Stairs: Thieves Attic Down Stairs
+          Tower Altar NW: Tower Agahnim 1 SW
+          Tower Catwalk North Stairs: Tower Antechamber South Stairs
+          Tower Dark Archers Up Stairs: Tower Red Spears Down Stairs
+          Tower Dark Chargers Up Stairs: Tower Dual Statues Down Stairs
+          Tower Pacifist Run Up Stairs: Tower Push Statue Down Stairs
+          Tower Room 03 Up Stairs: Tower Lone Statue Down Stairs
+        lobbies:
+          Agahnims Tower: Tower Lobby S
+          Desert Back: Desert Back Lobby S
+          Desert East: Desert East Lobby S
+          Desert South: Desert Main Lobby S
+          Desert West: Desert West S
+          Eastern: Eastern Lobby S
+          Ganons Tower: GT Lobby S
+          Hera: Hera Lobby S
+          Hyrule Castle East: Hyrule Castle East Lobby S
+          Hyrule Castle South: Hyrule Castle Lobby S
+          Hyrule Castle West: Hyrule Castle West Lobby S
+          Ice: Ice Lobby SE
+          Mire: Mire Lobby S
+          Palace of Darkness: PoD Lobby S
+          Sanctuary: Sanctuary S
+          Skull 1: Skull 1 Lobby S
+          Skull 2 East: Skull 2 East Lobby SW
+          Skull 2 West: Skull 2 West Lobby S
+          Skull 3: Skull 3 Lobby SW
+          Swamp: Swamp Lobby S
+          Thieves Town: Thieves Lobby S
+          Turtle Rock Chest: TR Big Chest Entrance SE
+          Turtle Rock Eye Bridge: TR Eye Bridge SW
+          Turtle Rock Lazy Eyes: TR Lazy Eyes SE
+          Turtle Rock Main: TR Main Lobby SE
+      settings:
+        bigkeyshuffle: 1
+        difficulty: normal    # Something about hard/expert just does not want to generate with this
+        door_shuffle: crossed
+        door_type_mode: chaos
+        mirrorscroll: 1
+        mixed_travel: allow
+        keyshuffle: 
+          universal: 15
+          wild: 85
+        trap_door_mode: boss
+      start_inventory:
+        - Compass (Desert Palace)
+        - Compass (Eastern Palace)
+        - Compass (Ganons Tower)
+        - Compass (Ice Palace)
+        - Compass (Misery Mire)
+        - Compass (Palace of Darkness)
+        - Compass (Skull Woods)
+        - Compass (Swamp Palace)
+        - Compass (Tower of Hera)
+        - Compass (Turtle Rock)
+        - Compass (Agahnims Tower)
+        - Compass (Escape)
+        - Map (Desert Palace)
+        - Map (Eastern Palace)
+        - Map (Ganons Tower)
+        - Map (Ice Palace)
+        - Map (Misery Mire)
+        - Map (Palace of Darkness)
+        - Map (Skull Woods)
+        - Map (Swamp Palace)
+        - Map (Thieves Town)
+        - Map (Tower of Hera)
+        - Map (Turtle Rock)
+        - Map (Escape)
+        - Map (Agahnims Tower)
+
+# Setting overrides by style section
+subweights:
+  bomb_bag:
+    chance: 5
+    settings:
+      1:
+        accessibility:
+          none: 5
+          items: 15
+          locations: 80
+        bigkeyshuffle:
+          0: 30
+          1: 70
+        bombbag: 1
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 20
+          none: 40
+          random: 20
+          simple: 10
+          unique: 10
+        compassshuffle:
+          0: 30
+          1: 70
+        crystals_ganon:
+          "2": 10
+          "3": 15
+          "4": 20
+          "5": 30
+          "6": 15
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 70
+          underworld: 10
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal:
+          crystals: 35
+          dungeons: 15
+          ganon: 35
+          pedestal: 15
+        keyshuffle:
+          none: 30
+          universal: 10
+          wild: 60
+        mapshuffle:
+          0: 30
+          1: 70
+        mirrorscroll:
+          0: 65
+          1: 35
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        ow_fluteshuffle:
+          balanced: 15
+          random: 20
+          vanilla: 65
+        ow_whirlpool:
+          0: 65
+          1: 35
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        randomkeydoors:
+          0: 95
+          1: 5
+        shopsanity:
+          0: 65
+          1: 35
+        shuffle:
+          crossed: 25
+          restricted: 10
+          swapped: 10
+          vanilla: 55
+        shuffle_followers:
+          0: 85
+          1: 15
+        swords:
+          assured: 65
+          random: 20
+          vanilla: 15
+  bosshunt:
+    chance: 5
+    placements:
+      1:
+        Desert Palace - Prize: Triforce Piece
+        Eastern Palace - Prize: Triforce Piece
+        Ice Palace - Prize: Triforce Piece
+        Misery Mire - Prize: Triforce Piece
+        Palace of Darkness - Prize: Triforce Piece
+        Skull Woods - Prize: Triforce Piece
+        Swamp Palace - Prize: Triforce Piece
+        Thieves' Town - Prize: Triforce Piece
+        Tower of Hera - Prize: Triforce Piece
+        Turtle Rock - Prize: Triforce Piece
+    settings:
+      1:
+        accessibility:
+          none: 5
+          items: 15
+          locations: 80
+        bigkeyshuffle:
+          none: 30
+          wild: 70
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 20
+          none: 40
+          random: 20
+          simple: 10
+          unique: 10
+        compassshuffle:
+          none: 30
+          wild: 70
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 70
+          underworld: 10
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal: ganonhunt
+        keyshuffle:
+          none: 30
+          universal: 10
+          wild: 60
+        mapshuffle:
+          none: 30
+          wild: 70
+        mirrorscroll:
+          0: 65
+          1: 35
+        mode:
+          open: 70
+          standard: 30
+        ow_fluteshuffle:
+          balanced: 15
+          random: 10
+          vanilla: 75
+        ow_whirlpool:
+          0: 70
+          1: 30
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        prizeshuffle: 
+          wild: 50
+          dungeon: 50
+        randomkeydoors:
+          0: 95
+          1: 5
+        shopsanity:
+          0: 65
+          1: 35
+        shuffle:
+          crossed: 25
+          restricted: 10
+          swapped: 10
+          vanilla: 55
+        shuffle_followers:
+          0: 85
+          1: 15
+        swords:
+          assured: 20
+          random: 55
+          swordless: 15
+          vanilla: 10
+        triforce_goal:
+          3: 2
+          4: 3
+          5: 10
+          6: 15
+          7: 20
+          8: 30
+          9: 15
+          10: 5
+        triforce_pool: 10
+  chaos_inventory:
+    chance: 15
+    settings:
+      1:
+        accessibility:
+          none: 5
+          items: 15
+          locations: 80
+        bigkeyshuffle:
+          0: 30
+          1: 70
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 20
+          random: 50
+          simple: 20
+          unique: 10
+        compassshuffle:
+          0: 30
+          1: 70
+        crystals_ganon:
+          "2": 10
+          "3": 20
+          "4": 20
+          "5": 20
+          "6": 20
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 70
+          underworld: 10
+        enemy_damage:
+          default: 75
+          random: 10
+          shuffled: 15
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle: shuffled
+        goal:
+          crystals: 35
+          dungeons: 15
+          ganon: 35
+          pedestal: 15
+        keyshuffle:
+          none: 30
+          universal: 10
+          wild: 60
+        mapshuffle:
+          0: 30
+          1: 70
+        mirrorscroll:
+          0: 75
+          1: 25
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        ow_fluteshuffle:
+          balanced: 15
+          random: 20
+          vanilla: 65
+        ow_whirlpool:
+          0: 75
+          1: 25
+        pottery:
+          cavekeys: 5
+          dungeon: 3
+          keys: 10
+          lottery: 2
+          none: 80
+        randomkeydoors:
+          0: 95
+          1: 5
+        shopsanity:
+          0: 60
+          1: 40
+        shuffle:
+          crossed: 20
+          restricted: 7
+          swapped: 8
+          vanilla: 65
+        shufflelinks:
+          0: 50
+          1: 50
+        shuffletavern:
+          0: 25
+          1: 75
+        shuffle_followers:
+          0: 70
+          1: 30
+        skullwoods:
+          original: 33
+          followlinked: 67
+        swords:
+          assured: 20
+          random: 60
+          swordless: 10
+          vanilla: 10
+    start_inventory:
+      1:
+        - Blue Boomerang:
+          yes: 12.5
+          no: 87.5
+        - Bombos:
+          yes: 12.5
+          no: 87.5
+        - Book of Mudora:
+          yes: 12.5
+          no: 87.5
+        - Bug Catching Net:
+          yes: 12.5
+          no: 87.5
+        - Cane of Byrna:
+          yes: 12.5
+          no: 87.5
+        - Cane of Somaria:
+          yes: 12.5
+          no: 87.5
+        - Cape:
+          yes: 12.5
+          no: 87.5
+        - Ether:
+          yes: 12.5
+          no: 87.5
+        - Fire Rod:
+          yes: 12.5
+          no: 87.5
+        - Flippers:
+          yes: 12.5
+          no: 87.5
+        - Hammer:
+          yes: 12.5
+          no: 87.5
+        - Hookshot:
+          yes: 12.5
+          no: 87.5
+        - Ice Rod:
+          yes: 12.5
+          no: 87.5
+        - Lamp:
+          yes: 12.5
+          no: 87.5
+        - Magic Mirror:
+          yes: 12.5
+          no: 87.5
+        - Magic Powder:
+          yes: 12.5
+          no: 87.5
+        - Moon Pearl:
+          yes: 12.5
+          no: 87.5
+        - Mushroom:
+          yes: 12.5
+          no: 87.5
+        - Ocarina (Activated):
+          yes: 12.5
+          no: 87.5
+        - Red Boomerang:
+          yes: 12.5
+          no: 87.5
+        - Shovel:
+          yes: 12.5
+          no: 87.5
+  doors:
+    chance: 5
+    settings:
+      1:
+        accessibility: locations
+        bigkeyshuffle:
+          0: 20
+          1: 80
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 10
+          none: 55
+          random: 15
+          simple: 15
+          unique: 5
+        compassshuffle:
+          0: 20
+          1: 80
+        crystals_ganon:
+          "2": 10
+          "3": 20
+          "4": 20
+          "5": 20
+          "6": 20
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        door_self_loops:
+          0: 75
+          1: 25
+        door_shuffle:
+          basic: 20
+          crossed: 45
+          partitioned: 35
+        door_type_mode:
+          all: 15
+          big: 30
+          chaos: 10
+          original: 45
+        dropshuffle:
+          keys: 65
+          none: 20
+          underworld: 15
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 75
+          easy: 5
+          normal: 15
+          hard: 5
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal:
+          crystals: 45
+          dungeons: 15
+          ganon: 25
+          pedestal: 15
+        intensity:
+          "2": 35
+          "3": 65
+        keyshuffle:
+          none: 15
+          universal: 20
+          wild: 65
+        mapshuffle:
+          0: 20
+          1: 80
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        ow_fluteshuffle:
+          balanced: 10
+          random: 25
+          vanilla: 65
+        ow_whirlpool:
+          0: 40
+          1: 60
+        pottery:
+          cavekeys: 15
+          dungeon: 11
+          keys: 45
+          lottery: 4
+          none: 25
+        shopsanity:
+          0: 30
+          1: 70
+        shuffle:
+          crossed: 35
+          restricted: 15
+          swapped: 5
+          vanilla: 45
+        shufflelinks:
+          0: 20
+          1: 80
+        shuffletavern:
+          0: 20
+          1: 80
+        shuffle_followers:
+          0: 85
+          1: 15
+        skullwoods:
+          original: 50
+          followlinked: 50
+        swords:
+          assured: 30
+          random: 55
+          swordless: 5
+          vanilla: 10
+        trap_door_mode:
+          boss: 20
+          optional: 60
+          vanilla: 20
+  entrance_banned:
+    chance: 35
+    settings:
+      1:
+        accessibility:
+          none: 10
+          items: 15
+          locations: 75
+        bigkeyshuffle:
+          0: 30
+          1: 70
+        bonk_drops:
+          0: 80
+          1: 20
+        bossshuffle:
+          full: 15
+          none: 50
+          random: 20
+          simple: 10
+          unique: 5
+        compassshuffle:
+          0: 30
+          1: 70
+        crystals_ganon:
+          "1": 3
+          "2": 10
+          "3": 19
+          "4": 23
+          "5": 25
+          "6": 15
+          "7": 5
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 15
+          none: 75
+          underworld: 10
+        enemy_damage:
+          default: 75
+          random: 10
+          shuffled: 15
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal:
+          crystals: 35
+          dungeons: 15
+          ganon: 35
+          pedestal: 15
+        keyshuffle:
+          none: 30
+          universal: 10
+          wild: 60
+        mapshuffle:
+          0: 30
+          1: 70
+        mirrorscroll:
+          0: 75
+          1: 25
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        ow_fluteshuffle:
+          balanced: 15
+          random: 20
+          vanilla: 65
+        ow_whirlpool:
+          0: 40
+          1: 60
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        randomkeydoors:
+          0: 90
+          1: 10
+        shopsanity:
+          0: 80
+          1: 20
+        shuffle: vanilla
+        shuffle_followers:
+          0: 85
+          1: 15
+        swords:
+          assured: 20
+          random: 55
+          swordless: 15
+          vanilla: 10
+  insaniflute:
+    chance: 5
+    settings:
+      1:
+        accessibility: locations
+        bigkeyshuffle:
+          0: 20
+          1: 80
+        bonk_drops:
+          0: 90
+          1: 10
+        bossshuffle:
+          full: 15
+          none: 35
+          random: 25
+          simple: 15
+          unique: 10
+        compassshuffle:
+          0: 20
+          1: 80
+        crystals_ganon:
+          "2": 10
+          "3": 20
+          "4": 20
+          "5": 20
+          "6": 20
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 75
+          underworld: 5
+        dungeon_counters: "on"
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 85
+          hard: 5
+          normal: 10
+        enemy_shuffle:
+          none: 75
+          shuffled: 25
+        goal:
+          crystals: 40
+          dungeons: 10
+          ganon: 35
+          pedestal: 15
+        keyshuffle:
+          none: 20
+          universal: 10
+          wild: 70
+        mapshuffle:
+          0: 20
+          1: 80
+        mirrorscroll: 1
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        ow_fluteshuffle:
+          balanced: 50
+          random: 50
+        ow_whirlpool:
+          0: 33
+          1: 67
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        randomkeydoors:
+          0: 95
+          1: 5
+        shopsanity:
+          0: 50
+          1: 50
+        shuffle: insanity
+        shufflelinks: 1
+        shuffletavern: 1
+        shuffle_followers:
+          0: 90
+          1: 10
+        skullwoods:
+          original: 90
+          followlinked: 10
+        swords:
+          assured: 20
+          random: 55
+          swordless: 15
+          vanilla: 10
+    start_inventory:
+      1:
+        - Ocarina (Activated)
+  owr:
+    chance: 5
+    settings:
+      1:
+        accessibility:
+          none: 5
+          items: 15
+          locations: 80
+        bigkeyshuffle:
+          none: 30
+          wild: 70
+        bonk_drops: 1
+        bossshuffle:
+          full: 20
+          none: 40
+          random: 20
+          simple: 10
+          unique: 10
+        compassshuffle:
+          none: 30
+          wild: 70
+        crystals_ganon:
+          "2": 10
+          "3": 15
+          "4": 20
+          "5": 30
+          "6": 15
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 75
+          underworld: 5
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal:
+          crystals: 35
+          dungeons: 15
+          ganon: 35
+          pedestal: 15
+        keyshuffle:
+          none: 30
+          universal: 10
+          wild: 60
+        mapshuffle:
+          none: 30
+          wild: 70
+        mirrorscroll:
+          0: 65
+          1: 35
+        mode:
+          open: 70
+          standard: 30
+        ow_crossed:
+          grouped: 20
+          none: 80
+        ow_fluteshuffle:
+          balanced: 55
+          random: 25
+          vanilla: 20
+        ow_keepsimilar:
+          0: 80
+          1: 20
+        ow_shuffle:
+          full: 10
+          parallel: 90
+        ow_whirlpool: 1
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        randomkeydoors:
+          0: 95
+          1: 5
+        shopsanity:
+          0: 65
+          1: 35
+        shuffle:
+          crossed: 15
+          restricted: 10
+          swapped: 5
+          vanilla: 70
+        shuffle_followers:
+          0: 70
+          1: 30
+        swords:
+          assured: 20
+          random: 55
+          swordless: 15
+          vanilla: 10
+    start_inventory:
+      1:
+        - Pegasus Boots
+  philes:
+    chance: 5
+    placements:
+      1:
+        Desert Palace - Boss: Triforce Piece
+        Desert Palace - Prize: Triforce Piece
+        Eastern Palace - Boss: Triforce Piece
+        Eastern Palace - Prize: Triforce Piece
+        Ganons Tower - Big Key Chest: Triforce Piece
+        Ganons Tower - Big Key Room - Left:
+          Triforce Piece:
+            Yes: 50
+            No: 50  # No is not a ban on it being there, it's just not hard forced - can still show up from normal fill
+        Ganons Tower - Big Key Room - Right:
+          Triforce Piece:
+            Yes: 50
+            No: 50
+        Ganons Tower - Mini Helmasaur Room - Left:
+          Triforce Piece:
+            Yes: 50
+            No: 50
+        Ganons Tower - Mini Helmasaur Room - Right:
+          Triforce Piece:
+            Yes: 50
+            No: 50
+        Ganons Tower - Pre-Moldorm Chest:
+          Triforce Piece:
+            Yes: 50
+            No: 50
+        Ganons Tower - Validation Chest: Triforce Piece
+        Ice Palace - Boss: Triforce Piece
+        Ice Palace - Prize: Triforce Piece
+        Misery Mire - Boss: Triforce Piece
+        Misery Mire - Prize: Triforce Piece
+        Palace of Darkness - Boss: Triforce Piece
+        Palace of Darkness - Prize: Triforce Piece
+        Skull Woods - Boss: Triforce Piece
+        Skull Woods - Prize: Triforce Piece
+        Swamp Palace - Boss: Triforce Piece
+        Swamp Palace - Prize: Triforce Piece
+        Thieves' Town - Boss: Triforce Piece
+        Thieves' Town - Prize: Triforce Piece
+        Tower of Hera - Boss: Triforce Piece
+        Tower of Hera - Prize: Triforce Piece
+        Turtle Rock - Boss: Triforce Piece
+        Turtle Rock - Prize: Triforce Piece
+    settings:
+      1:
+        accessibility:
+          none: 5
+          items: 15
+          locations: 80
+        bigkeyshuffle:
+          0: 15
+          1: 85
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 10
+          none: 50
+          random: 20
+          simple: 10
+          unique: 10
+        compassshuffle:
+          0: 15
+          1: 85
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 15
+          underworld: 85
+        dungeon_counters: "on"
+        enemy_damage:
+          default: 60
+          random: 15
+          shuffled: 25
+        enemy_health:
+          default: 60
+          easy: 10
+          hard: 10
+          normal: 20
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal: triforcehunt
+        hints: 1
+        keyshuffle:
+          universal: 20
+          wild: 80
+        mapshuffle:
+          0: 15
+          1: 85
+        mirrorscroll:
+          0: 40
+          1: 60
+        mode:
+          open: 80
+          standard: 20
+        ow_fluteshuffle:
+          balanced: 10
+          random: 25
+          vanilla: 65
+        ow_whirlpool:
+          0: 65
+          1: 35
+        pottery:
+          cavekeys: 10
+          dungeon: 25
+          lottery: 65
+        prizeshuffle: dungeon
+        shopsanity:
+          0: 30
+          1: 70
+        shuffle:
+          crossed: 30
+          restricted: 15
+          swapped: 10
+          vanilla: 45
+        shufflelinks:
+          0: 25
+          1: 75
+        shuffletavern:
+          0: 25
+          1: 75
+        shuffle_followers:
+          0: 85
+          1: 15
+        skullwoods:
+          original: 33
+          followlinked: 67
+        swords:
+          assured: 60
+          random: 15
+          swordless: 10
+          vanilla: 15
+  random_keydoors:
+    chance: 10
+    settings:
+      1:
+        accessibility: locations
+        bigkeyshuffle: 1
+        bonk_drops:
+          0: 70
+          1: 30
+        bossshuffle:
+          full: 10
+          none: 60
+          random: 10
+          simple: 10
+          unique: 10
+        crystals_ganon:
+          "2": 10
+          "3": 20
+          "4": 20
+          "5": 20
+          "6": 20
+          "7": 10
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 25
+          "4": 20
+          "5": 15
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 20
+          none: 75
+          underworld: 5
+        enemy_damage:
+          default: 75
+          random: 5
+          shuffled: 20
+        enemy_health:
+          default: 75
+          easy: 5
+          hard: 5
+          normal: 15
+        enemy_shuffle:
+          none: 65
+          shuffled: 35
+        goal:
+          crystals: 35
+          dungeons: 15
+          ganon: 35
+          pedestal: 15
+        keyshuffle: 
+          universal: 15
+          wild: 85
+        mirrorscroll: 1
+        mode:
+          inverted: 20
+          open: 80
+        pottery:
+          cavekeys: 10
+          dungeon: 7
+          keys: 10
+          lottery: 3
+          none: 70
+        ow_fluteshuffle:
+          balanced: 15
+          random: 20
+          vanilla: 65
+        ow_whirlpool:
+          0: 75
+          1: 25
+        randomkeydoors: 1
+        shopsanity:
+          0: 60
+          1: 40
+        shuffle:
+          crossed: 20
+          restricted: 10
+          swapped: 5
+          vanilla: 65
+        shufflelinks:
+          0: 50
+          1: 50
+        shuffletavern:
+          0: 25
+          1: 75
+        shuffle_followers:
+          0: 85
+          1: 15
+        skullwoods:
+          original: 33
+          followlinked: 67
+        swords:
+          assured: 20
+          random: 60
+          swordless: 10
+          vanilla: 10
+  triple_bingo:
+    chance: 10
+    meta:
+      seed_name: pogchamp_tb
+      seed_notes: Pogchampion Mystery Triple Bingo
+      user_notes: Pogchampion Mystery Triple Bingo
+    settings:
+      1:
+        accessibility: locations
+        bigkeyshuffle:
+          0: 15
+          1: 85
+        bonk_drops:
+          0: 80
+          1: 20
+        compassshuffle:
+          0: 15
+          1: 85
+        crystals_gt:
+          "0": 5
+          "1": 10
+          "2": 10
+          "3": 15
+          "4": 20
+          "5": 25
+          "6": 10
+          "7": 5
+        dropshuffle:
+          keys: 10
+          none: 90
+        goal: dungeons
+        keyshuffle:
+          none: 15
+          universal: 5
+          wild: 80
+        mapshuffle:
+          0: 15
+          1: 85
+        mirrorscroll:
+          0: 75
+          1: 25
+        mode:
+          inverted: 20
+          open: 55
+          standard: 25
+        pottery:
+          dungeon: 5
+          keys: 20
+          none: 75
+        shopsanity:
+          0: 60
+          1: 40
+        shuffle:
+          crossed: 30
+          restricted: 10
+          swapped: 15
+          vanilla: 45
+        shufflelinks:
+          0: 50
+          1: 50
+        shuffletavern:
+          0: 25
+          1: 75
+        shuffle_followers:
+          0: 70
+          1: 30
+        skullwoods:
+          original: 33
+          followlinked: 67
+        swords:
+          assured: 20
+          random: 55
+          swordless: 15
+          vanilla: 10
