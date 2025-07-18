@@ -95,12 +95,13 @@ rules:
         Value: [random, swordless]
       settings:
         mirrorscroll: 1
-    - and_conditions:   # Ensure blue squares/chest counters and default enemy health for full underworld enemy drop shuffle
+    - and_conditions:   # Ensure blue squares, default enemy health, and a sword for full enemy drop shuffle
       - Key: dropshuffle
         Value: underworld
       settings:
         dungeon_counters: "on"
         enemy_health: default
+        swords: assured
     - and_conditions:   # Disable blue balls/warps for AD
       - Key: goal
         Value: dungeons
