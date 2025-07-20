@@ -8,7 +8,7 @@ meta:
 settings: # Default settings
   1:
     aga_randomness: true
-    bossshuffle: none
+    boss_shuffle: none
     bow_mode:
       progressive: 60
       retro: 10
@@ -133,29 +133,6 @@ rules:
       bingo_squares:
         excludes:
           - Perfect Archery Game
-    - and_conditions:   # Force original SW setting when not crossed shuffle - followlinked almost always fails to generate
-      - Key: shuffle
-        NotValue: crossed
-      settings:
-        skullwoods: original
-    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - non-retro version
-      - Key: shuffle
-        NotValue: vanilla
-      - Key: skullwoods
-        Value: original
-      - Key: keyshuffle
-        NotValue: universal
-      placements:
-        Skull Woods - Pinball Room: Small Key (Skull Woods)
-    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - retro version
-      - Key: shuffle
-        NotValue: vanilla
-      - Key: skullwoods
-        Value: original
-      - Key: keyshuffle
-        Value: universal
-      placements:
-        Skull Woods - Pinball Room: Small Key (Universal)
     - and_conditions:   # Generic TFH pool sizes based on enemy drop/pottery options
       - Key: goal
         Value: triforcehunt
@@ -221,7 +198,34 @@ rules:
         Value: standard
       settings:
         randomkeydoors: 0
-    - and_conditions:   # Settings for random key doors with vanilla dungeon layouts (ty Jem)
+    - and_conditions:   # Force non-insanity entrance to crossed for random key doors
+      - Key: randomkeydoors
+        Value: 1
+      - Key: shuffle
+        NotValue: [vanilla, insanity]
+      settings:
+        shuffle: crossed
+    - and_conditions:   # Force some sort of enemy drop shuffle for random key doors if not already chosen
+      - Key: randomkeydoors
+        Value: 1
+      - Key: dropshuffle
+        Value: none
+      settings:
+        dropshuffle:
+          keys: 90
+          underworld: 10
+    - and_conditions:   # Force some sort of pottery shuffle for random key doors if not already chosen
+      - Key: randomkeydoors
+        Value: 1
+      - Key: pottery
+        Value: none
+      settings:
+        pottery:
+          cavekeys: 5
+          dungeon: 7
+          keys: 85
+          lottery: 3
+    - and_conditions:   # Base settings for random key doors with vanilla dungeon layouts (ty Jem)
       - Key: randomkeydoors
         Value: 1
       doors:
@@ -480,7 +484,6 @@ rules:
           Turtle Rock Main: TR Main Lobby SE
       settings:
         bigkeyshuffle: 1
-        difficulty: normal    # Something about hard/expert just does not want to generate with this
         door_shuffle: crossed
         door_type_mode: chaos
         mirrorscroll: 1
@@ -515,6 +518,29 @@ rules:
         - Map (Turtle Rock)
         - Map (Escape)
         - Map (Agahnims Tower)
+    - and_conditions:   # Force original SW setting when not crossed shuffle - followlinked almost always fails to generate
+      - Key: shuffle
+        NotValue: crossed
+      settings:
+        skullwoods: original
+    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - non-retro version
+      - Key: shuffle
+        NotValue: vanilla
+      - Key: skullwoods
+        Value: original
+      - Key: keyshuffle
+        NotValue: universal
+      placements:
+        Skull Woods - Pinball Room: Small Key (Skull Woods)
+    - and_conditions: # Force SW pinball small key if entrance, but not using SW shuffling - retro version
+      - Key: shuffle
+        NotValue: vanilla
+      - Key: skullwoods
+        Value: original
+      - Key: keyshuffle
+        Value: universal
+      placements:
+        Skull Woods - Pinball Room: Small Key (Universal)
 
 # Setting overrides by style section
 subweights:
@@ -533,7 +559,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 20
           none: 40
           random: 20
@@ -650,7 +676,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 20
           none: 40
           random: 20
@@ -757,7 +783,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 20
           random: 50
           simple: 20
@@ -931,7 +957,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 10
           none: 55
           random: 15
@@ -1059,7 +1085,7 @@ subweights:
         bonk_drops:
           0: 80
           1: 20
-        bossshuffle:
+        boss_shuffle:
           full: 15
           none: 50
           random: 20
@@ -1159,7 +1185,7 @@ subweights:
         bonk_drops:
           0: 90
           1: 10
-        bossshuffle:
+        boss_shuffle:
           full: 15
           none: 35
           random: 25
@@ -1241,9 +1267,7 @@ subweights:
         shuffle_followers:
           0: 90
           1: 10
-        skullwoods:
-          original: 90
-          followlinked: 10
+        skullwoods: original
         swords:
           assured: 20
           random: 55
@@ -1264,7 +1288,7 @@ subweights:
           none: 30
           wild: 70
         bonk_drops: 1
-        bossshuffle:
+        boss_shuffle:
           full: 20
           none: 40
           random: 20
@@ -1423,7 +1447,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 10
           none: 50
           random: 20
@@ -1517,7 +1541,7 @@ subweights:
         bonk_drops:
           0: 70
           1: 30
-        bossshuffle:
+        boss_shuffle:
           full: 10
           none: 60
           random: 10
@@ -1540,9 +1564,8 @@ subweights:
           "6": 10
           "7": 5
         dropshuffle:
-          keys: 20
-          none: 75
-          underworld: 5
+          keys: 90
+          underworld: 10
         enemy_damage:
           default: 75
           random: 5
@@ -1568,11 +1591,10 @@ subweights:
           inverted: 20
           open: 80
         pottery:
-          cavekeys: 10
+          cavekeys: 5
           dungeon: 7
-          keys: 10
+          keys: 85
           lottery: 3
-          none: 70
         ow_fluteshuffle:
           balanced: 15
           random: 20
@@ -1585,9 +1607,7 @@ subweights:
           0: 60
           1: 40
         shuffle:
-          crossed: 20
-          restricted: 10
-          swapped: 5
+          crossed: 35
           vanilla: 65
         shufflelinks:
           0: 50
