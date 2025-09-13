@@ -133,6 +133,21 @@ rules:
       bingo_squares:
         excludes:
           - Perfect Archery Game
+    - or_conditions:   # Prevent arrow capacity goals if retro bow
+        - Key: bow_mode
+          Value: retro
+        - Key: bow_mode
+          Value: retro_silvers
+      bingo_squares:
+        excludes:
+          - 40 arrows
+          - 45 arrows
+          - 50 arrows
+          - 55 arrows
+          - 20 bombs AND 40 arrows
+          - 25 bombs AND 40 arrows
+          - 30 bombs AND 40 arrows
+          - 30 bombs AND 50 arrows          
     - and_conditions:   # Generic TFH pool sizes based on enemy drop/pottery options
       - Key: goal
         Value: triforcehunt
