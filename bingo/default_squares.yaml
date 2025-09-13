@@ -75,16 +75,16 @@ goals:
   min: 3
   max: 7
   choices:
-  - - Defeat Mothula
-    - Defeat Arrghus
-    - Defeat Blind
-    - Defeat Moldorm
-    - Defeat Vitreous
-  - - Defeat Armos Knights
-    - Defeat Kholdstare
-    - Defeat Trinexx
-    - Defeat Helmasaur King
-    - Defeat Lanmolas
+  - - Defeat the boss at Skull Woods
+    - Defeat the boss at Swamp Palace
+    - Defeat the boss at Thieves Town
+    - Defeat the boss at Tower of Hera
+    - Defeat the boss at Misery Mire
+  - - Defeat the boss at Eastern Palace
+    - Defeat the boss at Ice Palace
+    - Defeat the boss at Turtle Rock
+    - Defeat the boss at Palace of Darkness
+    - Defeat the boss at Desert Palace
   - - Defeat Aga 1
     - Defeat Aga 2
     - Defeat Aga 1 OR Aga 2
