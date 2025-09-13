@@ -75,6 +75,25 @@ rules:
         Value: shuffled
       settings:
         swords: assured
+    - and_conditions:   # Remove potentially impossible minion bingo squares if enemy shuffle
+        - Key: enemy_shuffle
+          Value: shuffled
+      bingo_squares:
+        excludes:
+          - Defeat a Lynel
+          - Defeat a Red Eyegore and a Red Mimic
+          - Defeat a Pickle
+          - Defeat a Deadrock
+          - Stun a Pickle
+          - Stun a Pikit
+          - Stun a Terrorpin
+          - Burn a Red Bari
+          - Burn a Ball & Chain Guard
+          - Burn a Stalfos Skull
+          - Freeze a Bomb Slug
+          - Freeze a Kodongo
+          - Freeze a Pokey
+          - Freeze and toss 3 birds     
     - and_conditions:   # Remove health/damage shuffle and item pool if swordless, and ban medallion bingo goals
       - Key: swords
         Value: swordless
@@ -160,6 +179,18 @@ rules:
       bingo_squares:
         excludes:
           - Perfect Archery Game
+    - and_conditions:   # Remove bomb capacity bingo squares if bomb bag
+        - Key: bombbag
+          NotValue: none
+      bingo_squares:
+        excludes:
+          - 25 bombs
+          - 30 bombs
+          - 35 bombs
+          - 40 bombs
+          - 25 bombs AND 40 arrows
+          - 30 bombs AND 40 arrows
+          - 30 bombs AND 50 arrows
     - or_conditions:   # Prevent arrow capacity goals if retro bow
         - Key: bow_mode
           Value: retro
@@ -174,7 +205,23 @@ rules:
           - 20 bombs AND 40 arrows
           - 25 bombs AND 40 arrows
           - 30 bombs AND 40 arrows
-          - 30 bombs AND 50 arrows          
+          - 30 bombs AND 50 arrows
+    - and_conditions:   # Remove bomb and arrow capacity bingo square if bomb bag and retro bow
+        - Key: bombbag
+          NotValue: none
+        - Key: bow_mode
+          Value: retro
+      bingo_squares:
+        excludes:
+          - Max out bomb OR arrow capacity
+    - and_conditions:   # Remove bomb and arrow capacity bingo square if bomb bag and retro bow + silvers
+        - Key: bombbag
+          NotValue: none
+        - Key: bow_mode
+          Value: retro_silvers
+      bingo_squares:
+        excludes:
+          - Max out bomb OR arrow capacity       
     - and_conditions:   # Generic TFH pool sizes based on enemy drop/pottery options
       - Key: goal
         Value: triforcehunt
