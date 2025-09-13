@@ -99,6 +99,12 @@ rules:
     - and_conditions:   # Remove impossible health goals in bingo if expert
         - Key: difficulty
           Value: expert
+    - and_conditions:   # Remove impossible health goals in bingo if hard
+        - Key: difficulty
+          Value: hard
+      bingo_squares:
+        excludes:
+          - Mail Upgrade          
       bingo_squares:
         excludes:
           - 10 total hearts
@@ -107,7 +113,8 @@ rules:
           - 12 heart pieces
           - 4 heart containers
           - 5 heart containers
-          - 6 heart containers        
+          - 6 heart containers
+          - Mail Upgrade
     - and_conditions:   # Force mirror scroll if standard but no starting sword to allow gaining resources in escape
       - Key: mode
         Value: standard
