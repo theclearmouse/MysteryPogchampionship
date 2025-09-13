@@ -87,7 +87,8 @@ rules:
           - Use Bombos in Hotel Mario
           - Use a Medallion on a boss (Not Kholdstare's shell)
           - Use Quake at Kakariko Weathervane
-          - Use Ether in the front of Tavern          
+          - Use Ether in the front of Tavern
+          - Collect 3 swords
     - and_conditions:   # Bump expert item pool back down to hard if swordless
       - Key: swords
         Value: swordless
