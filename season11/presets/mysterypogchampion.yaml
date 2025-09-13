@@ -75,12 +75,15 @@ rules:
         Value: shuffled
       settings:
         swords: assured
-    - and_conditions:   # Remove health/damage shuffle and item pool if swordless
+    - and_conditions:   # Remove health/damage shuffle and item pool if swordless, and ban medallion bingo goals
       - Key: swords
         Value: swordless
       settings:
         enemy_health: default
         enemy_damage: default
+      bingo_squares:
+        excludes:
+          - Freeze and toss 3 birds        
     - and_conditions:   # Bump expert item pool back down to hard if swordless
       - Key: swords
         Value: swordless
