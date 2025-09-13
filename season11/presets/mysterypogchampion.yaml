@@ -95,6 +95,18 @@ rules:
         Value: expert
       settings:
         difficulty: hard
+    - and_conditions:   # Remove impossible health goals in bingo if expert
+        - Key: difficulty
+          Value: expert
+      bingo_squares:
+        excludes:
+          - 10 total hearts
+          - 11 total hearts
+          - 12 total hearts
+          - 12 heart pieces
+          - 4 heart containers
+          - 5 heart containers
+          - 6 heart containers        
     - and_conditions:   # Force mirror scroll if standard but no starting sword to allow gaining resources in escape
       - Key: mode
         Value: standard
