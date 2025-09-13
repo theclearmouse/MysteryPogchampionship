@@ -83,7 +83,11 @@ rules:
         enemy_damage: default
       bingo_squares:
         excludes:
-          - Freeze and toss 3 birds        
+          - Freeze and toss 3 birds
+          - Use Bombos in Hotel Mario
+          - Use a Medallion on a boss (Not Kholdstare's shell)
+          - Use Quake at Kakariko Weathervane
+          - Use Ether in the front of Tavern          
     - and_conditions:   # Bump expert item pool back down to hard if swordless
       - Key: swords
         Value: swordless
