@@ -115,7 +115,7 @@ rules:
         Value: expert
       settings:
         difficulty: hard
-    - and_conditions:   # Remove impossible health goals in bingo if expert
+    - and_conditions:   # Remove impossible health and weapon goals in bingo if expert
         - Key: difficulty
           Value: expert
       bingo_squares:
@@ -127,7 +127,9 @@ rules:
           - 4 heart containers
           - 5 heart containers
           - 6 heart containers
-          - Mail Upgrade          
+          - Mail Upgrade
+          - Collect 2 shields
+          - Collect 3 swords
     - and_conditions:   # Remove impossible health goals in bingo if hard
         - Key: difficulty
           Value: hard
