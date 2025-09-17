@@ -181,19 +181,19 @@ goals:
   max: 2
   choices:
   - - Break Ether AND Bombos tablets
-  - - Open 6 small key doors in Ice Palace
-  - - Open 4 small key doors in Skull Woods
-  - - Kill 6 Freezors in Ice Palace
+  - - Open all small key doors in Ice Palace
+  - - Open all small key doors in Skull Woods
+  - - Kill all Freezors in Ice Palace
   - - Spend 1500 Rupees
   - - Pull Pedestal
-  - - Open 5 small key doors in Palace of Darkness
-  - - Open 6 small key doors in Misery Mire
+  - - Open all small key doors in Palace of Darkness
+  - - Open all small key doors in Misery Mire
   - - Defeat a Lynel
   - - Perfect Archery Game
   - - Get the item from Lumberjack Ledge
   - - Collect all 3 medallions
   - - Bring a golden bee to the bottle vendor
-  - - Open 8 small key doors in Ganon's Tower
+  - - Open all small key doors in Ganon's Tower
 - name: Misc and Memes
   min: 2
   max: 7
