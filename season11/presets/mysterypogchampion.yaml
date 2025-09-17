@@ -115,7 +115,7 @@ rules:
         Value: expert
       settings:
         difficulty: hard
-    - and_conditions:   # Remove impossible health and weapon goals in bingo if expert
+    - and_conditions:   # Remove impossible health and weapon and upgrade goals in bingo if expert
         - Key: difficulty
           Value: expert
       bingo_squares:
@@ -130,12 +130,38 @@ rules:
           - Mail Upgrade
           - Collect 2 shields
           - Collect 3 swords
-    - and_conditions:   # Remove impossible health goals in bingo if hard
+          - 25 bombs
+          - 30 bombs
+          - 35 bombs
+          - 40 bombs
+          - 40 arrows
+          - 45 arrows
+          - 50 arrows
+          - 55 arrows
+          - 20 bombs AND 40 arrows
+          - 25 bombs AND 40 arrows
+          - 30 bombs AND 40 arrows
+          - 30 bombs AND 50 arrows
+          - Max out bomb OR arrow capacity          
+    - and_conditions:   # Remove impossible health and upgrade goals in bingo if hard
         - Key: difficulty
           Value: hard
       bingo_squares:
         excludes:
           - Mail Upgrade
+          - 25 bombs
+          - 30 bombs
+          - 35 bombs
+          - 40 bombs
+          - 40 arrows
+          - 45 arrows
+          - 50 arrows
+          - 55 arrows
+          - 20 bombs AND 40 arrows
+          - 25 bombs AND 40 arrows
+          - 30 bombs AND 40 arrows
+          - 30 bombs AND 50 arrows
+          - Max out bomb OR arrow capacity 
     - and_conditions:   # Force mirror scroll if standard but no starting sword to allow gaining resources in escape
       - Key: mode
         Value: standard
