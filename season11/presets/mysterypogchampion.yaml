@@ -175,6 +175,36 @@ rules:
         take_any:
           none: 80
           random: 20
+    - and_conditions:   # Swap universal small keys back to normal keys if standard + doors
+      - Key: mode
+        Value: standard
+      - Key: keyshuffle
+        Value: universal
+      - Key: door_shuffle
+        NotValue: vanilla
+      settings:
+        keyshuffle: wild
+    - and_conditions:   # Standard + universal keys + no enemy drops = start with 1 key
+      - Key: mode
+        Value: standard
+      - Key: keyshuffle
+        Value: universal
+      - Key: dropshuffle
+        Value: none
+      start_inventory:
+        - Small Key (Universal)
+    - and_conditions:   # Standard + universal keys + enemy drop shuffle = start with 4 keys
+      - Key: mode
+        Value: standard
+      - Key: keyshuffle
+        Value: universal
+      - Key: dropshuffle
+        NotValue: none
+      start_inventory:
+        - Small Key (Universal)
+        - Small Key (Universal)
+        - Small Key (Universal)
+        - Small Key (Universal)          
     - and_conditions:   # Prevent the archery game being a bingo goal if take anys exist
       - Key: take_any
         NotValue: none
