@@ -1847,98 +1847,99 @@ subweights:
           random: 55
           swordless: 15
           vanilla: 10
-gt_entry:
+goals:
   1:
-    cutscene_gfx: 
-      'Green Rupees (20)': 1
-      'Pegasus Boots': 1
-      'Psuedoboots': 1
-      'Blue Pendant': 1
-      'Red Pendant': 1
-      'Warp Tile': 1
-      'Open Chest': 1
-      'Chicken': 2
-      'Duck': 2
-      'Chest': 1
-      'Frog': 1
-      'Kiki (Head)': 1
-      'Purple Chest': 1
-      'Super Bomb': 1
-      'Blacksmith': 1
-      'Bug Net': 1
-      'Crystal': 1
-      'Silver Arrows': 1
-      'Bow': 1
-      'Bottle (Fairy)': 1
-      'Bottle (Bee)': 1
-      'Piece of Heart': 1
-      'Ocarina': 1
-      'Mirror Shield': 1
-      'Rupees (100)': 1
-      'Rupees (50)': 1
-      'Rupees (300)': 1
-      'Flippers': 1
-      'Mirror': 1
-      'Bomb': 1
-      'Lamp': 1
-      'Psuedolamp': 1
-      'Magic Cape': 1
-      'Compass': 1
-      'Moon Pearl': 1
-      'Ether': 1
-      'Bombos': 1
-      'Quake': 1
-      'Bottle': 1
-      'Bottle (Red Potion)': 1
-      'Bottle (Green Potion)': 1
-      'Bottle (Blue Potion)': 1
-      'Mushroom': 1
-      'Map': 1
-      'Big Key': 1
-      'Bombs (3)': 1
-      'Arrows (10)': 1
-      'Heart Container': 1
-      'Green Mail': 1
-      'Blue Mail': 1
-      'Red Mail': 1
-      'Fire Sheild': 1
-      'Blue Shield': 1
-      'Magic Powder': 1
-      'Bombs (10)': 1
-      'Power Glove': 1
-      'Titans Mitts': 1
-      'Book of Mudora': 2
-      'Maiden (Head)': 2
-      'Zelda (Head)': 2
-      'Old Man (Head)': 2
-      'Locksmith (Head)': 2
-      'Fire': 1
-      'Apples': 1
-      'Fairy': 1
-      'Whirlpool': 1
-      'Triforce': 1
-      'Fighter Sword': 1
-      'Master Sword': 1
-      'Tempered Sword': 1
-      'Golden Sword': 1
-      'Half Magic': 1
-      'Quarter Magic': 1
-      'Bomb Upgrade (+5)': 1
-      'Bomb Upgrade (+10)': 1
-      'Bomb Upgrade (50)': 1
-      'Bombbag': 1
-      'Arrow Upgrade (+5)': 1
-      'Arrow Upgrade (+10)': 1
-      'Arrows (70)': 1
-      'Silver Arrows (Ag)': 1
-      'Green Pendant': 1
-      'Sword and Shield': 1
-      'Green Potion': 1
-      'Blue Potion': 1
-      'Red Potion': 1
-      'Bee Trap': 1
-      'Red Crystal': 1
-      'Egg': 1
-      'Master Key': 1
-      'Lumberjack (Head)': 2
-      'Power Star': 1
+    gtentry: 
+      cutscene_gfx: 
+        'Green Rupees (20)': 1
+        'Pegasus Boots': 1
+        'Psuedoboots': 1
+        'Blue Pendant': 1
+        'Red Pendant': 1
+        'Warp Tile': 1
+        'Open Chest': 1
+        'Chicken': 2
+        'Duck': 2
+        'Chest': 1
+        'Frog': 1
+        'Kiki (Head)': 1
+        'Purple Chest': 1
+        'Super Bomb': 1
+        'Blacksmith': 1
+        'Bug Net': 1
+        'Crystal': 1
+        'Silver Arrows': 1
+        'Bow': 1
+        'Bottle (Fairy)': 1
+        'Bottle (Bee)': 1
+        'Piece of Heart': 1
+        'Ocarina': 1
+        'Mirror Shield': 1
+        'Rupees (100)': 1
+        'Rupees (50)': 1
+        'Rupees (300)': 1
+        'Flippers': 1
+        'Mirror': 1
+        'Bomb': 1
+        'Lamp': 1
+        'Psuedolamp': 1
+        'Magic Cape': 1
+        'Compass': 1
+        'Moon Pearl': 1
+        'Ether': 1
+        'Bombos': 1
+        'Quake': 1
+        'Bottle': 1
+        'Bottle (Red Potion)': 1
+        'Bottle (Green Potion)': 1
+        'Bottle (Blue Potion)': 1
+        'Mushroom': 1
+        'Map': 1
+        'Big Key': 1
+        'Bombs (3)': 1
+        'Arrows (10)': 1
+        'Heart Container': 1
+        'Green Mail': 1
+        'Blue Mail': 1
+        'Red Mail': 1
+        'Fire Sheild': 1
+        'Blue Shield': 1
+        'Magic Powder': 1
+        'Bombs (10)': 1
+        'Power Glove': 1
+        'Titans Mitts': 1
+        'Book of Mudora': 2
+        'Maiden (Head)': 2
+        'Zelda (Head)': 2
+        'Old Man (Head)': 2
+        'Locksmith (Head)': 2
+        'Fire': 1
+        'Apples': 1
+        'Fairy': 1
+        'Whirlpool': 1
+        'Triforce': 1
+        'Fighter Sword': 1
+        'Master Sword': 1
+        'Tempered Sword': 1
+        'Golden Sword': 1
+        'Half Magic': 1
+        'Quarter Magic': 1
+        'Bomb Upgrade (+5)': 1
+        'Bomb Upgrade (+10)': 1
+        'Bomb Upgrade (50)': 1
+        'Bombbag': 1
+        'Arrow Upgrade (+5)': 1
+        'Arrow Upgrade (+10)': 1
+        'Arrows (70)': 1
+        'Silver Arrows (Ag)': 1
+        'Green Pendant': 1
+        'Sword and Shield': 1
+        'Green Potion': 1
+        'Blue Potion': 1
+        'Red Potion': 1
+        'Bee Trap': 1
+        'Red Crystal': 1
+        'Egg': 1
+        'Master Key': 1
+        'Lumberjack (Head)': 2
+        'Power Star': 1
