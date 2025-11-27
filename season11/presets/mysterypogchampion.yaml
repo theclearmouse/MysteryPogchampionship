@@ -1861,7 +1861,7 @@ goals:
         'Chicken': 2
         'Duck': 2
         'Chest': 1
-        'Frog': 1
+        'Frog': 2
         'Kiki (Head)': 1
         'Purple Chest': 1
         'Super Bomb': 1
@@ -1930,7 +1930,6 @@ goals:
         'Bombbag': 1
         'Arrow Upgrade (+5)': 1
         'Arrow Upgrade (+10)': 1
-        'Arrows (70)': 1
         'Silver Arrows (Ag)': 1
         'Green Pendant': 1
         'Sword and Shield': 1
